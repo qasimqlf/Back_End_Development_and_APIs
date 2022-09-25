@@ -2,6 +2,7 @@
 
 
 Project 1 > Timestamp Microservice
+Similar to https://timestamp-microservice.freecodecamp.rocks.
 
 Project 2 > Request Header Parser Microservice
 
