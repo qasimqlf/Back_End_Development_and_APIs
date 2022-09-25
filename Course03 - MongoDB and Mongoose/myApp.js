@@ -3,6 +3,7 @@ let mongoose = require('mongoose');
 const mySecret = process.env['MONGO_URI'];
 mongoose.connect(mySecret, { useNewUrlParser: true, useUnifiedTopology: true });
 
+//Create a Model
 const personSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -13,12 +14,13 @@ const personSchema = new mongoose.Schema({
 })
 
 let Person = mongoose.model('Person', personSchema);
+
+//Create and Save a Record of a Model
 let qasim = new Person({ name: 'Mr Qasim', age: 25, favoriteFoods: ['Biryani'] });
 let andy = new Person({ name: 'Andy', age: 24, favoriteFoods: ['Meat'] });
 let arrayOfPeople = [qasim, andy];
 
 const createAndSavePerson = (done) => {
-  //   ...do your stuff here...
   qasim.save(function(err, data) {
     if(err) {
       done(err);
