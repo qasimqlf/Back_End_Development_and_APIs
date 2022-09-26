@@ -24,11 +24,23 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-// your first API endpoint... 
-app.get("/api/qasim", function (req, res) {
-  res.json({greeting: 'hello qasim'});
+//Current Date Api
+app.get("/api", (req, res) => {
+    let now = new Date();
+    res.json({ unix: now.getTime(), utc: now.toUTCString() });
 });
 
+app.get("/api/:date", (req, res) => {
+  let paramsDate = req.params.date;
+
+  let date = parseInt(paramsDate) < 10000 ? new Date(paramsDate) : new Date(parseInt(paramsDate))
+
+  if(date.toString() === "Invalid Date") {
+    res.json( { error : "Invalid Date"} )
+  } else {
+    res.json( { unix: date.getTime(), utc: date.toUTCString() } );
+  }
+});
 
 
 // listen for requests :)
