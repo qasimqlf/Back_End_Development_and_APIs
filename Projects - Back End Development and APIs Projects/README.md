@@ -2,11 +2,12 @@
 
 
 Project 1 > Timestamp Microservice
-Similar to https://timestamp-microservice.freecodecamp.rocks.
+Similar to https://timestamp-microservice.freecodecamp.rocks
 
 Project 2 > Request Header Parser Microservice
 
 Project 3 > URL Shortener Microservice
+Similar to https://url-shortener-microservice.freecodecamp.rocks
 
 Project 4 > Exercise Tracker
 
