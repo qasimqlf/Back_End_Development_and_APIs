@@ -57,40 +57,34 @@ app.get("/api/shorturl/:input", (req, res) => {
 })
 
 app.post("/api/shorturl", async (req, res) => {
-    let bodyUrl = req.body.url;
-   // let urlRegex = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/);
+  let bodyUrl = req.body.url;
+  let urlRegex = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/);
 
-  // Call to lookup function of dns
-  dns.lookup(bodyUrl, (err, address, family) => {
-    if(!err) {
-      return res.json({ error: 'invalid url' });
-    }
-     let index = 1;
+  if (!bodyUrl.match(urlRegex)) {
+      return res.json({ error: "Invalid URL" });
+  }
+  let index = 1;
 
-    Url.findOne({})
-        .sort({ short: 'desc' })
-        .exec((err, data) => {
-            if (err) return res.json({ error: "No url found." })
+  Url.findOne({})
+      .sort({ short: 'desc' })
+      .exec((err, data) => {
+          if (err) return res.json({ error: "No url found." })
 
-            index = data !== null ? data.short + 1 : index;
+          index = data !== null ? data.short + 1 : index;
 
-            Url.findOneAndUpdate(
-                { original: bodyUrl },
-                { original: bodyUrl, short: index },
-                { new: true, upsert: true },
-                (err, newUrl) => {
-                    if (!err) {
-                        res.json({ original_url: bodyUrl, short_url: newUrl.short })
-                    }
-                }
-            )
-        });
-    
+          Url.findOneAndUpdate(
+              { original: bodyUrl },
+              { original: bodyUrl, short: index },
+              { new: true, upsert: true },
+              (err, newUrl) => {
+                  if (!err) {
+                      res.json({ original_url: bodyUrl, short_url: newUrl.short })
+                  }
+              }
+          )
   });
   
-  /* if (!bodyUrl.match(urlRegex)) {
-    return res.json({ error: "Invalid URL" });
-  }*/
+
 });
 
 app.listen(port, function() {
