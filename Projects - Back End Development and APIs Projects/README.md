@@ -10,6 +10,7 @@ Project 3 > URL Shortener Microservice
 Similar to https://url-shortener-microservice.freecodecamp.rocks
 
 Project 4 > Exercise Tracker
+Similar to https://exercise-tracker.freecodecamp.rocks
 
 Project 5 > File Metadata Microservice
 
