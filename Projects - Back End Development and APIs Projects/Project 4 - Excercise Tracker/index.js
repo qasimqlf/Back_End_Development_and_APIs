@@ -84,7 +84,7 @@ app.post('/api/users', (req, res) => {
 app.post('/api/users/:id/exercises', (req, res) => {
     const id = req.params.id;
     let { description, duration, date } = req.body;
-  //here
+
     const newExercise = {
         description: description,
         duration: duration,
